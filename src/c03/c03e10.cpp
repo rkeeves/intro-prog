@@ -42,6 +42,6 @@ int main()
   cin >> op1;
   cout << "Enter the second operand:\n";
   cin >> op2;
-  cout << "The result is number for " << oper(op1,op2) << endl;
+  cout << "The result is " << oper(op1,op2) << endl;
   return 0;
 }
