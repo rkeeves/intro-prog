@@ -6,7 +6,7 @@ This project contains source files for the Introduction to Programming course.
 See the below table for task administration.
 Tasks can be **finished** or *unfinished*.
 |Task|Points|RollingSum|Notes|
-|-|:-:|:-:|-|
+| --- | :---: | :---: | --- |
 |**SUM**|80|||
 |**Példák/Labor/1/Hello world**| 3|  3||
 |**Könyv/Fejezet/0**| 2|  5||
