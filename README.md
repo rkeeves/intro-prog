@@ -4,6 +4,7 @@ Introduction to Programming Course
 This project contains source files for the Introduction to Programming course.
 ## Administration
 See the below table for task administration.
+
 Tasks can be **finished** or *unfinished*.
 |Task|Points|RollingSum|Notes|
 | --- | :---: | :---: | --- |
