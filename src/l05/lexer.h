@@ -211,33 +211,13 @@ namespace calc{
     while (calc::isSpace(peek())) get();
     char c = peek();
     if(c == '\0')
-      return Token(calc::Kind::End, m_i, 1);
+      {return Token(calc::Kind::End, m_i, 1);}
     if(calc::isValidIdentifierBegin(c))
-      return identifier(m_i);
+      {return identifier(m_i);}
     if(calc::isDigit(c))
-      return number(m_i);
-    /*
-    if(c == '+')
-    {
-      size_t start = m_i;
-      get();
-      if(calc::isDigit(peek()))
-        {return number(start);}
-      else
-        {return Token(Kind::Plus, start, 1); }
-    }
-    if(c == '-')
-    {
-      size_t start = m_i;
-      get();
-      if(calc::isDigit(peek()))
-        {return number(start);}
-      else
-        {return Token(Kind::Minus, start, 1); }
-    }*/
-
+      {return number(m_i);}
     if(calc::isDigit(c))
-      return number(m_i);
+      {return number(m_i);}
     switch (c) {
       case '(':
         return atom(calc::Kind::LeftParen);
@@ -267,9 +247,8 @@ namespace calc{
     iterateFractional(start);
     if(peek() == 'e'){
       get();
-      if(peek() == '-' || peek() == '+'){
-        get();
-      }
+      if(peek() == '-' || peek() == '+')
+        {get(); }
       if(!calc::isDigit(peek()))
       {
           std::ostringstream strs;

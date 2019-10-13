@@ -1,6 +1,25 @@
-// Useful contents in this topic:
-// + Simple C++17 Lexer   - https://gist.github.com/arrieta/1a309138689e09375b90b3b1aa768e20
-// + GNU Bison            - https://www.gnu.org/software/bison/
+// 
+// Simple Calculator for lab purposes
+// 
+// Usage examples:
+// 
+// (1) - Variables declaration
+// > let a = 7.6e4;
+// 
+// (2) - Expression evaluation
+// > let a = 7.6e4;
+// > a*-1.1;
+// 
+// (3)- Visualizing TokenStream and parser tree root node
+// > tokens;
+// > tree;
+// > let a = 7.6e4;
+// > a*-1.1;
+// 
+// Related:
+// + Simple C++17 Lexer         - https://gist.github.com/arrieta/1a309138689e09375b90b3b1aa768e20
+// + GNU Bison                  - https://www.gnu.org/software/bison/
+// + Simple language in Python  - https://github.com/andybalaam/cell/blob/master/pycell/parser.py
 //
 #include <iostream>
 #include <string>
@@ -11,7 +30,9 @@
 #include "parser.h"
 #include "evaluator.h"
 #include <iterator>
+
 using namespace calc;
+
 const std::string IN_HEADER =          "============\n"
                                         "=Input\n"
                                         "============\n";
@@ -88,13 +109,15 @@ int main()
 		calculate();
 		return 0;
 	}
-	catch (std::exception& e) {
+  catch (std::exception& e) 
+  {
 		std::cerr << "exception: " << e.what() << std::endl;
 		char c;
 		while (std::cin >>c&& c!=';') ;
 		return 1;
 	}
-	catch (...) {
+	catch (...) 
+  {
 		std::cerr << "exception\n";
 		char c;
 		while (std::cin>>c && c!=';');

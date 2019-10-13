@@ -13,4 +13,4 @@ namespace calc{
     }
   };
 } /* end of namespace calc */
-#endif // PARSER_H
+#endif // EVALUATOR_H
