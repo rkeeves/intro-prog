@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iostream>
 #include <set>
+
 namespace calc{
 
   typedef std::map<std::string,double> VariableMap;
