@@ -50,9 +50,33 @@ namespace lzw{
     }
   }
   
-  void writeToFile(std::ostream &os, const LZWBTree &tree){
+  void writeToFileInorder(std::ostream &os, const LZWBTree &tree){
     PrettyPrinter printer(os);
     tree.inOrder(true,&printer);
+    DepthAnalyzer da;
+    tree.inOrder(true,&da);
+    DepthVarianceAnalyzer dva(da.getMeanDepth());
+    tree.inOrder(true,&dva);
+    os << "depth: " << da.getMaxDepth() << std::endl;
+    os << "mean: " << da.getMeanDepth() << std::endl;
+    os << "var: " << dva.getDepthVariance() << std::endl;
+  }
+  
+  void writeToFilePostorder(std::ostream &os, const LZWBTree &tree){
+    PrettyPrinter printer(os);
+    tree.postOrder(true,&printer);
+    DepthAnalyzer da;
+    tree.inOrder(true,&da);
+    DepthVarianceAnalyzer dva(da.getMeanDepth());
+    tree.inOrder(true,&dva);
+    os << "depth: " << da.getMaxDepth() << std::endl;
+    os << "mean: " << da.getMeanDepth() << std::endl;
+    os << "var: " << dva.getDepthVariance() << std::endl;
+  }
+  
+  void writeToFilePreorder(std::ostream &os, const LZWBTree &tree){
+    PrettyPrinter printer(os);
+    tree.preOrder(true,&printer);
     DepthAnalyzer da;
     tree.inOrder(true,&da);
     DepthVarianceAnalyzer dva(da.getMeanDepth());

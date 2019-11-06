@@ -11,12 +11,13 @@ void usage (void)
   std::cout << "Usage: lzwtree [IN_FILE] -o [OUT_FILE]" << std::endl;
   std::cout << std::endl;
   std::cout << "Options:" << std::endl;
-  std::cout << "  " << "-o,  output file to write" << std::endl;
+  std::cout << "  " << "-o,  output file to write (required)" << std::endl;
   std::cout << "  " << "-m,  max bytes to read" << std::endl;
   std::cout << "  " << "-l,  treat '0' as 0 all else as '1' from input" << std::endl;
+  std::cout << "  " << "-t,  traversal for print: 1 preorder, 2 postorder, else inorder" << std::endl;
 }
 
-void handleArgs(int argc, char **argv, std::string &inFName, std::string &outFName, int &maxbytes, bool &sourceIsLiteralBinary){
+void handleArgs(int argc, char **argv, std::string &inFName, std::string &outFName, int &maxbytes, bool &sourceIsLiteralBinary, int &traversal){
   Args args(argc,argv);
   auto optPos = args[""];
   if(optPos.size() != 2){
@@ -50,6 +51,19 @@ void handleArgs(int argc, char **argv, std::string &inFName, std::string &outFNa
   if(args.hasOpt("-l")){
     sourceIsLiteralBinary = true;
   }
+  if(args.hasOpt("-t")){
+    auto optBytes = args["-t"];
+    if(optBytes.size() != 1){
+      throw std::runtime_error("Bad traversal option!");
+    }else{
+      try{
+        traversal = std::stoi( optBytes[0] );
+        
+      }catch(...){
+        throw std::runtime_error("Bad traversal option!");
+      }
+    }
+  }
   return;
 }
 
@@ -58,9 +72,9 @@ int main(int argc, char **argv){
   std::string outFName;
   int maxbytes = -1;
   bool sourceIsLiteralBinary = false;
-  
+  int traversal = 0;
   try{
-    handleArgs(argc, argv, inFName,outFName, maxbytes,sourceIsLiteralBinary) ;
+    handleArgs(argc, argv, inFName,outFName, maxbytes,sourceIsLiteralBinary,traversal) ;
   }catch(const std::exception &e){
     std::cerr << "[ARGUMENT_ERROR] " << e.what() << std::endl << std::endl;
     usage ();
@@ -84,7 +98,13 @@ int main(int argc, char **argv){
   inFile.close ();
 
   std::fstream outFile (outFName, std::ios_base::out);
-  writeToFile(outFile,rawptrtree);
+  if(traversal == 2){
+    writeToFilePostorder(outFile,rawptrtree);
+  }else if(traversal == 1){
+    writeToFilePreorder(outFile,rawptrtree);
+  }else{
+    writeToFileInorder(outFile,rawptrtree);
+  }
   outFile.close ();
   
   return 0;
