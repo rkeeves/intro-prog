@@ -32,4 +32,4 @@ extern int fetch_person_by_id(Person*,int);
 // Ő meg a kisbarátja most nem a kérdés tárgya
 // Csak megakartam jegyezni, hogy miattuk megy az egész wrapperelés :)
 typedef int (*PersonOrganVisitFn) (Organ,UserData);
-extern int ProSolidAxisVisit  (Person ,PersonOrganVisitFn ,UserData);
+extern int DoPersonOrganVisit  (Person ,PersonOrganVisitFn ,UserData);
